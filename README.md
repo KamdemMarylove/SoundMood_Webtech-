@@ -1,11 +1,12 @@
 Soundmood ist eine Webanwendung, die Nutzer anhand ihrer aktuellen Stimmung passende Musiktipps bietet. Funktionen sollen sein:
-Vorauswahl der aktuellen Stimmung (Bsp.: Gut drauf, nachdenklich, traurig,...)
 
-Dynamische Generierung eines Musiktipps passend zur gewählten Stimmung
+-Vorauswahl der aktuellen Stimmung (Bsp.: Gut drauf, nachdenklich, traurig,...)
 
-Einfache und klare Benutzeroberfläche 
+-Dynamische Generierung eines Musiktipps passend zur gewählten Stimmung
 
-Eventuelle Auswertung am Ende der Woche: Überblick über die Stimmung
+-Einfache und klare Benutzeroberfläche 
+
+-Eventuelle Auswertung am Ende der Woche: Überblick über die Stimmung
 
 Mögliche technische Umsetzung:
 
