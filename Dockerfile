@@ -1,11 +1,12 @@
+# Stage 1: Build the app
+FROM gradle:8.5-jdk21 AS builder
+WORKDIR /app
+COPY . .
+RUN gradle clean build -x test
+
+# Stage 2: Create the runtime image
 FROM eclipse-temurin:21-jre
 WORKDIR /app
-
-# Copy build artifact
-COPY build/libs/*.jar app.jar
-
-# Expose port (Spring Boot default 8080)
+COPY --from=builder /app/build/libs/*.jar app.jar
 EXPOSE 8080
-
-# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
