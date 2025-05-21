@@ -16,7 +16,9 @@
 # limitations under the License.
 #
 # SPDX-License-Identifier: Apache-2.0
-#
+#git checkout --theirs gradlew
+ #git add gradlew
+ #git rebase --continue
 
 ##############################################################################
 #
