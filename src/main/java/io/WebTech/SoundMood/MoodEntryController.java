@@ -19,22 +19,24 @@ public class MoodEntryController {
         this.songRepo = songRepo;
     }
 
+    // ✅ Speichern oder überschreiben – nur ein Eintrag pro Tag
     @PostMapping
     public MoodEntry saveOrUpdateEntry(@RequestBody MoodEntry entry) {
         LocalDate today = LocalDate.now();
         entry.setDate(today);
 
-        Optional<MoodEntry> existing = entryRepo.findByDate(today);
-        if (existing.isPresent()) {
-            MoodEntry update = existing.get();
-            update.setMood(entry.getMood());
-            update.setSong(entry.getSong());
-            return entryRepo.save(update);
+        // Alle Einträge von heute holen
+        List<MoodEntry> todaysEntries = entryRepo.findByDate(today);
+
+        // Falls heute schon etwas gespeichert wurde: löschen
+        if (!todaysEntries.isEmpty()) {
+            entryRepo.deleteAll(todaysEntries);
         }
 
         return entryRepo.save(entry);
     }
 
+    // ✅ Einträge dieser Woche abrufen
     @GetMapping("/week")
     public List<MoodEntry> getThisWeeksEntries() {
         LocalDate today = LocalDate.now();
@@ -42,18 +44,19 @@ public class MoodEntryController {
         return entryRepo.findByDateBetween(monday, today);
     }
 
+    // ✅ Alle Einträge abrufen (Test & Übersicht)
     @GetMapping
     public List<MoodEntry> getAllEntries() {
         return entryRepo.findAll();
     }
 
-    // Optional: Alles löschen (nur für Tests!)
+    // 🧹 Alles löschen (nur für Entwickler/Testzwecke)
     @DeleteMapping
     public void deleteAll() {
         entryRepo.deleteAll();
     }
 
-    // Optional: Einzeln löschen
+    // Optional: Einzelne löschen (falls nötig)
     @DeleteMapping("/{id}")
     public void deleteOne(@PathVariable Long id) {
         entryRepo.deleteById(id);
