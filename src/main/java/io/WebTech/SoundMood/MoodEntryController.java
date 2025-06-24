@@ -43,6 +43,12 @@ public class MoodEntryController {
         LocalDate monday = today.minusDays(today.getDayOfWeek().getValue() - 1);
         return entryRepo.findByDateBetween(monday, today);
     }
+    @PatchMapping("/{id}/like")
+    public MoodEntry markAsLiked(@PathVariable Long id) {
+        MoodEntry entry = entryRepo.findById(id).orElseThrow();
+        entry.setLiked(true);
+        return entryRepo.save(entry);
+    }
 
     // ✅ Alle Einträge abrufen (Test & Übersicht)
     @GetMapping

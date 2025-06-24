@@ -9,6 +9,11 @@ import java.time.LocalDate;
 @Getter
 @Entity
 public class MoodEntry {
+    @Getter
+    @Setter
+    @Column
+    private boolean liked = false;
+
 
     // Getter & Setter
     @Id
@@ -31,6 +36,7 @@ public class MoodEntry {
         this.date = date;
         this.mood = mood;
         this.song = song;
+
     }
 
 }
